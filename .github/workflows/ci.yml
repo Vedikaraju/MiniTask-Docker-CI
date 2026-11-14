@@ -11,6 +11,9 @@ jobs:
   test-and-build:
     runs-on: ubuntu-latest
 
+    env:
+      PYTHONPATH: ${{ github.workspace }}
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -25,8 +28,6 @@ jobs:
 
       - name: Run tests
         run: python -m pytest -q
-        env:
-          PYTHONPATH: .
 
       - name: Build Docker image
         run: docker build -t minitask:ci .
